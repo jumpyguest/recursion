@@ -3,10 +3,8 @@ def merge_sort(array)
     return array
   else
     mid = array.size / 2
-    left = array.slice(0..mid-1)
-    right = array.slice(mid..-1)
-    array1 = merge_sort(left)
-    array2 = merge_sort(right)
+    array1 = merge_sort(array[0..mid-1])
+    array2 = merge_sort(array[mid..-1])
     merge(array1, array2)
   end
 end
@@ -21,18 +19,9 @@ def merge(array1, array2)
       result << array2[0]
       array2.shift
     end
-    break if array1.size == 0 || array2.size == 0
+    break if array1.empty? || array2.empty?
   end
-  if array1.size != 0
-    array1.each do |value|
-      result << value
-    end
-  elsif array2.size != 0
-    array2.each do |value|
-      result << value
-    end
-  end
-  result
+  result + array1 + array2
 end
 
 test = [105, 79, 100, 110]
